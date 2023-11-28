@@ -1,0 +1,28 @@
+Tool for automatically assigning state ownership, claims, and cores on a large scale.
+Reads states from ./states, then history/states, and lets you pull them onto the 'stack',
+a list which contains every state you wish to perform actions on.
+
+commands:   help	       Displays this information
+	    examples	       Show command examples and their English equivalent
+	    implementation     A technical breakdown of the program in some detail
+	    pull ATTR	       Pulls certain states that have ATTR onto the stack
+	    set [ATTR1] ATTR2  Sets all states that have ATTR1 on the stack to have ATTR2
+			       If ATTR1 is ommitted, set all states on the stack to have ATTR2
+	    clear [ATTR]       Clears the stack, deleting any changes made
+			       (If ATTR is included, only clears states that have ATTR)
+	    push	       Writes the states on the stack to ./states, and then clears the stack
+	    exit	       Exits the program
+
+attributes: id		       State ID
+	    tag		       Tag of the owner of a state
+	    core	       Tags of cores
+	    claim	       Tags of claims
+
+modifiers:  attr	       OR, pulls any state that meets attr to any degree,
+			       adds to state's attributes when setting
+	    &attr     	       AND, pulls any state that has at least all of attr,
+			       has no effect when setting
+	    @attr	       ONLY, pulls any state that has only attr,
+			       replaces state's attribute with attr when setting
+	    !attr	       NOT, pulls any state which doesn't have attr
+			       removes attr from state when setting

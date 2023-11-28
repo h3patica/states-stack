@@ -1,0 +1,43 @@
+examples:
+
+English sentence equivalent
+Command
+
+Pull all states that Austria has a core in onto the stack
+pull core:AUS
+
+Pull states 1, 5, and 95 onto the stack
+pull id:1,5,95
+
+Pull all states in which only Austria has a core onto the stack
+pull @core:AUS
+
+Pull all states that Austria or Hungary have a core in onto the stack
+pull core:AUS,HUN
+
+Pull all states that Austria and Hungary have a core in onto the stack
+pull &core:AUS,HUN
+
+Pull all states that Austria doesn't have a core in onto the stack
+pull !core:AUS
+
+Set all states on the stack that are owned by Austria to be owned by Germany
+set tag:AUS tag:GER
+
+Set all states on the stack that Austria has a core on to be cored by Germany and Italy
+set core:AUS core:GER,ITA
+
+Set all states on the stack that Austria has a core on to be cored by only Germany and Italy
+set core:AUS @core:GER,ITA
+
+Set all states on the stack that Austria doesn't have a core on to have their German cores removed
+set !core:AUS !core:GER
+
+Set all states on the stack to be without German cores
+set !core:GER
+
+Clear all Austrian states off the stack
+clear tag:AUS
+
+Clear all states off the stack
+clear

@@ -1,0 +1,27 @@
+implementation: on startup					Reads all state files in /history/states and ./states and reads them into
+								a list of all states, those in ./states taking priority if there are duplicates.
+				
+		
+		pull ATTR					ATTR is broken down into three parts: a modifier (&/@/!), the attribute (core/tag/etc), 
+pull(attr, list_of_states):					and values (1234/TAG).
+for each state in list_of_states:
+	if state has attr:					This attribute with a modifier and values is given to `pull`, which iterates through
+		new_list.add(state)				the total list of states and puts them in a new list if they meet the conditions of
+								the attribute information provided. This new list is then added to the stack.
+return new_list
+								`pull` can basically be thought of as a filter, filtering off states from the stack aside
+								from those that meet a certain condition.
+
+		set ATTR1 ATTR2 				`set` utilizes `pull`, but uses it to filter the stack instead of the entire list of
+set(attr1, attr2, list_of_states):				countries. From this filtered list, it changes the attributes of each state within it
+filtered_list = pull(attr1, list_of_states)			according to ATTR2. 
+for each state in filtered_list:
+	state.set(attr2)					After any command is sent, first the command is processed, and then every state which is
+								currently on the stack is printed onto the terminal with updated information.
+return filtered_list
+
+		set ATTR2					`set` without any attribute to filter by still filters it, but tells `pull` to give it
+set(!id:-1, attr2, list_of_states)				all states that don't have an ID of -1 -- which is all of them.
+
+		clear ATTR					`clear` when given an attribute calls `pull` to filter the stack, and then removes
+stack = stack - pull(attr, stack)				that filtered list from the stack.
