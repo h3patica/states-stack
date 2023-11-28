@@ -6,7 +6,6 @@
 
 from typing import List, Tuple, Any
 from parser import State
-from lib import openAsStr
 import os
 
 
